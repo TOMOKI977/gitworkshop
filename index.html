@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Git y GitHub, desde cero</title>
+  <meta name="description" content="Presentación básica de Git y GitHub en dos recorridos: terminal y agentes de IA.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Git y GitHub, desde cero">
+  <meta property="og:description" content="Crear proyectos, ramas, issues, pull requests y trabajo en equipo, con terminal o con agentes de IA.">
+  <meta name="theme-color" content="#111014">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='8' fill='%23FDDA24'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body class="track-terminal">
+<main id="deck">
+
+  <!-- 0. Cover -->
+  <section id="cover" class="slide dark" aria-labelledby="cover-title">
+    <p class="eyebrow reveal">GIT · GITHUB · BÁSICO</p>
+    <h1 id="cover-title" class="reveal">Git y <span class="hl">GitHub</span>, desde cero</h1>
+    <p class="lead reveal">Crear un proyecto, trabajar con ramas, abrir issues y pull requests, y colaborar en equipo.</p>
+
+    <div class="track-picker reveal" role="radiogroup" aria-label="Elige tu recorrido">
+      <p class="picker-label">Elige tu recorrido</p>
+      <div class="picker-options">
+        <button type="button" class="track-btn" data-track="terminal" role="radio" aria-checked="true">
+          <span class="track-title">Terminal</span>
+          <span class="track-desc">Escribes los comandos de git y gh tú mismo.</span>
+        </button>
+        <button type="button" class="track-btn" data-track="agentes" role="radio" aria-checked="false">
+          <span class="track-title">Agentes de IA</span>
+          <span class="track-desc">Le pides a tu agente que ejecute la tarea por ti.</span>
+        </button>
+      </div>
+      <p class="picker-hint">Usa las flechas del teclado o la rueda del mouse para avanzar.</p>
+    </div>
+  </section>
+
+  <!-- 0.5. Quién soy -->
+  <section id="quien" class="slide light" aria-labelledby="quien-title">
+    <p class="eyebrow reveal">QUIÉN SOY</p>
+    <h2 id="quien-title" class="reveal">Julio Severiche</h2>
+    <div class="cards cards-2">
+      <article class="card reveal">
+        <p class="num">ROL</p>
+        <h3>Fullstack Developer</h3>
+      </article>
+      <article class="card reveal link-card">
+        <p class="num">ENLACES</p>
+        <h3>Linktree</h3>
+        <a class="link-btn" href="https://linktr.ee/tomoki977" target="_blank" rel="noopener noreferrer">linktr.ee/tomoki977 &rarr;</a>
+        <figure class="qr qr-sm">
+          <img src="qr/linktree.svg" alt="Código QR hacia https://linktr.ee/tomoki977" width="180" height="180">
+          <figcaption>Escanea con tu celular</figcaption>
+        </figure>
+      </article>
+    </div>
+  </section>
+
+  <!-- 1. Git vs GitHub -->
+  <section id="conceptos" class="slide light" aria-labelledby="conceptos-title">
+    <p class="eyebrow reveal">CONCEPTOS</p>
+    <h2 id="conceptos-title" class="reveal">Git y GitHub no son lo mismo</h2>
+    <div class="cards cards-2">
+      <article class="card reveal">
+        <p class="num">GIT</p>
+        <h3>Control de versiones</h3>
+        <p class="body">Programa que guarda la historia de tus archivos en tu computadora. Te deja volver atrás, comparar cambios y trabajar en ramas.</p>
+      </article>
+      <article class="card reveal">
+        <p class="num">GITHUB</p>
+        <h3>Plataforma en la nube</h3>
+        <p class="body">Sitio web que aloja repositorios de Git y agrega colaboración: issues, pull requests y revisiones.</p>
+      </article>
+    </div>
+    <p class="lead reveal"><span class="hl">Git trabaja en tu máquina.</span> GitHub es donde lo compartes con otros.</p>
+  </section>
+
+  <!-- 2. Instalación y configuración -->
+  <section id="config" class="slide dark" aria-labelledby="config-title">
+    <p class="eyebrow reveal">PASO 1</p>
+    <h2 id="config-title" class="reveal">Instalar y configurar tu identidad</h2>
+    <p class="lead reveal">Git necesita saber quién hace cada cambio. Ese nombre y correo aparecen en cada commit.</p>
+    <div class="compare">
+      <div class="block block-terminal reveal">
+        <div class="block-head"><span class="tag tag-manual">Terminal</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>git --version
+git config --global user.name "Tu Nombre"
+git config --global user.email "tu@correo.com"
+git config --global --list</code></pre>
+      </div>
+      <div class="block block-ai reveal">
+        <div class="block-head"><span class="tag tag-ai">Agentes IA</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>Revisa si git está instalado. Si lo está, configura mi nombre
+y correo globales para git con los datos que te doy a
+continuación. Antes de escribir, muéstrame la configuración
+que vas a aplicar.</code></pre>
+      </div>
+    </div>
+    <p class="expect reveal"><strong>Qué esperar:</strong> <code>git --version</code> muestra la versión instalada. <code>--list</code> muestra tu nombre y correo.</p>
+  </section>
+
+  <!-- 3. Crear un proyecto -->
+  <section id="proyecto" class="slide light" aria-labelledby="proyecto-title">
+    <p class="eyebrow reveal">PASO 2</p>
+    <h2 id="proyecto-title" class="reveal">Crear un proyecto con repositorio</h2>
+    <p class="lead reveal">Un <strong>repositorio</strong> es una carpeta que Git vigila. <code>git init</code> la convierte en repositorio.</p>
+    <div class="compare">
+      <div class="block block-terminal reveal">
+        <div class="block-head"><span class="tag tag-manual">Terminal</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>mkdir mi-proyecto
+cd mi-proyecto
+git init
+git status</code></pre>
+      </div>
+      <div class="block block-ai reveal">
+        <div class="block-head"><span class="tag tag-ai">Agentes IA</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>Crea una carpeta llamada mi-proyecto en este directorio,
+inicialízala como repositorio de git y muéstrame el estado.</code></pre>
+      </div>
+    </div>
+    <p class="expect reveal"><strong>Qué esperar:</strong> aparece la carpeta <code>.git</code> (oculta) y <code>git status</code> dice que estás en la rama <code>main</code> sin commits todavía.</p>
+  </section>
+
+  <!-- 4. Primer cambio: add, status, commit -->
+  <section id="primer-cambio" class="slide dark" aria-labelledby="primer-cambio-title">
+    <p class="eyebrow reveal">PASO 3</p>
+    <h2 id="primer-cambio-title" class="reveal">Primer cambio: status, add y commit</h2>
+    <div class="flow reveal" aria-hidden="true">
+      <span>Editas</span><span>git status</span><span>git add</span><span>git commit</span>
+    </div>
+    <div class="compare">
+      <div class="block block-terminal reveal">
+        <div class="block-head"><span class="tag tag-manual">Terminal</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>echo # Mi proyecto &gt; README.md
+git status
+git add README.md
+git commit -m "docs: add README"
+git log --oneline</code></pre>
+      </div>
+      <div class="block block-ai reveal">
+        <div class="block-head"><span class="tag tag-ai">Agentes IA</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>Crea un README.md con el título "Mi proyecto" y una
+descripción de una línea. Muéstrame git status, agrega el
+archivo al área de preparación y haz un commit con el mensaje
+"docs: add README".</code></pre>
+      </div>
+    </div>
+    <p class="expect reveal"><strong>Qué esperar:</strong> <code>git status</code> muestra el archivo en rojo (sin preparar). Después de <code>add</code> pasa a verde. <code>git log</code> muestra tu commit.</p>
+    <p class="note reveal"><strong>Diferencia:</strong> <code>git add .</code> prepara <em>todos</em> los cambios. Revisa <code>git status</code> antes para no subir archivos por error.</p>
+  </section>
+
+  <!-- 5. Conventional commits -->
+  <section id="commits" class="slide light" aria-labelledby="commits-title">
+    <p class="eyebrow reveal">PASO 4</p>
+    <h2 id="commits-title" class="reveal">Mensajes de commit claros</h2>
+    <p class="lead reveal">Usa el formato <strong>tipo: descripción corta</strong>, en imperativo. Así cualquiera entiende la historia.</p>
+    <div class="cards cards-3">
+      <article class="card reveal"><p class="num">feat</p><p class="body">Funcionalidad nueva: <code>feat: add login form</code></p></article>
+      <article class="card reveal"><p class="num">fix</p><p class="body">Corrección de un error: <code>fix: handle empty email</code></p></article>
+      <article class="card reveal"><p class="num">docs</p><p class="body">Solo documentación: <code>docs: explain install steps</code></p></article>
+    </div>
+  </section>
+
+  <!-- 6. .gitignore -->
+  <section id="gitignore" class="slide dark" aria-labelledby="gitignore-title">
+    <p class="eyebrow reveal">PASO 5</p>
+    <h2 id="gitignore-title" class="reveal">Ignorar archivos con .gitignore</h2>
+    <p class="lead reveal">Hay archivos que no deben entrar al repositorio: dependencias, secretos y resultados de compilación.</p>
+    <div class="compare">
+      <div class="block block-terminal reveal">
+        <div class="block-head"><span class="tag tag-manual">Terminal</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>echo node_modules/ &gt; .gitignore
+echo .env &gt;&gt; .gitignore
+git add .gitignore
+git commit -m "chore: add gitignore"</code></pre>
+      </div>
+      <div class="block block-ai reveal">
+        <div class="block-head"><span class="tag tag-ai">Agentes IA</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>Crea un .gitignore adecuado para mi proyecto (ignora
+dependencias, archivos de entorno y compilados). Haz commit
+con el mensaje "chore: add gitignore".</code></pre>
+      </div>
+    </div>
+    <p class="expect reveal"><strong>Qué esperar:</strong> <code>git status</code> ya no muestra <code>.env</code> ni <code>node_modules/</code>, aunque existan.</p>
+  </section>
+
+  <!-- 7. Ramas -->
+  <section id="ramas" class="slide light" aria-labelledby="ramas-title">
+    <p class="eyebrow reveal">PASO 6</p>
+    <h2 id="ramas-title" class="reveal">Trabajar en ramas</h2>
+    <p class="lead reveal">Una rama es una línea de trabajo aislada. <code>main</code> queda estable y cada tarea vive en su propia rama.</p>
+    <div class="compare">
+      <div class="block block-terminal reveal">
+        <div class="block-head"><span class="tag tag-manual">Terminal</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>git branch
+git switch -c feature/login
+git add .
+git commit -m "feat: add login form"
+git switch main
+git merge feature/login
+git branch -d feature/login</code></pre>
+      </div>
+      <div class="block block-ai reveal">
+        <div class="block-head"><span class="tag tag-ai">Agentes IA</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>Crea una rama llamada feature/login a partir de main,
+haz los cambios necesarios para el formulario de login y
+haz commit. Después vuelve a main, haz merge de la rama y
+borra la rama local.</code></pre>
+      </div>
+    </div>
+    <p class="note reveal"><strong>Windows y versiones antiguas:</strong> <code>git switch -c</code> es equivalente a <code>git checkout -b</code>. Ambas crean y cambian de rama.</p>
+  </section>
+
+  <!-- 8. Subir a GitHub -->
+  <section id="github" class="slide dark" aria-labelledby="github-title">
+    <p class="eyebrow reveal">PASO 7</p>
+    <h2 id="github-title" class="reveal">Subir tu repositorio a GitHub</h2>
+    <p class="lead reveal">Crea un repositorio <strong>vacío</strong> en GitHub (sin README ni .gitignore), copia su URL y conéctalo.</p>
+    <div class="compare">
+      <div class="block block-terminal reveal">
+        <div class="block-head"><span class="tag tag-manual">Terminal</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>git remote add origin https://github.com/TU-USUARIO/TU-REPO.git
+git push -u origin main</code></pre>
+      </div>
+      <div class="block block-ai reveal">
+        <div class="block-head"><span class="tag tag-ai">Agentes IA</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>Crea un repositorio público llamado TU-REPO en mi cuenta
+de GitHub (sin README) y conecta este proyecto como origin.
+Luego sube la rama main.</code></pre>
+      </div>
+    </div>
+    <p class="expect reveal"><strong>Qué esperar:</strong> al refrescar la página del repositorio en GitHub aparecen tus archivos y tus commits.</p>
+    <p class="note reveal"><strong>Autenticación:</strong> la primera vez, Git te pedirá iniciar sesión. Con GitHub CLI: <code>gh auth login</code>.</p>
+  </section>
+
+  <!-- 9. Issues -->
+  <section id="issues" class="slide light" aria-labelledby="issues-title">
+    <p class="eyebrow reveal">PASO 8</p>
+    <h2 id="issues-title" class="reveal">Crear issues</h2>
+    <p class="lead reveal">Un issue describe un problema, una mejora o una tarea. Título claro, contexto y criterio de terminado.</p>
+    <div class="compare">
+      <div class="block block-terminal reveal">
+        <div class="block-head"><span class="tag tag-manual">Terminal</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>gh issue create --title "Login falla con correo vacío" --body "Al enviar el formulario sin correo la app se cierra. Esperado: mensaje de error."
+gh issue list</code></pre>
+      </div>
+      <div class="block block-ai reveal">
+        <div class="block-head"><span class="tag tag-ai">Agentes IA</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>Crea un issue en este repositorio con el título "Login falla
+con correo vacío" y una descripción con pasos para reproducir,
+resultado esperado y resultado actual.</code></pre>
+      </div>
+    </div>
+    <p class="note reveal"><strong>Requisito:</strong> <code>gh</code> (GitHub CLI) instalado y autenticado con <code>gh auth login</code>.</p>
+  </section>
+
+  <!-- 10. Pull requests -->
+  <section id="pr" class="slide dark" aria-labelledby="pr-title">
+    <p class="eyebrow reveal">PASO 9</p>
+    <h2 id="pr-title" class="reveal">Pull requests</h2>
+    <p class="lead reveal">Un pull request (PR) propone fusionar tu rama a <code>main</code> para que otra persona la revise.</p>
+    <div class="flow reveal" aria-hidden="true">
+      <span>Rama</span><span>Commit</span><span>Push</span><span>PR</span><span>Revisión</span><span>Merge</span>
+    </div>
+    <div class="compare">
+      <div class="block block-terminal reveal">
+        <div class="block-head"><span class="tag tag-manual">Terminal</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>git push -u origin feature/login
+gh pr create --fill
+gh pr view --web</code></pre>
+      </div>
+      <div class="block block-ai reveal">
+        <div class="block-head"><span class="tag tag-ai">Agentes IA</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>Sube la rama feature/login y abre un pull request hacia
+main. En la descripción pon "Closes #1" para vincular el
+issue y resume los cambios en 3 viñetas.</code></pre>
+      </div>
+    </div>
+    <p class="note reveal"><strong>Tip:</strong> <code>Closes #N</code> en la descripción cierra el issue N automáticamente al hacer merge.</p>
+  </section>
+
+  <!-- 11. Manejo de ramas en equipo -->
+  <section id="ramas-equipo" class="slide light" aria-labelledby="ramas-equipo-title">
+    <p class="eyebrow reveal">PASO 10</p>
+    <h2 id="ramas-equipo-title" class="reveal">Mantener las ramas al día</h2>
+    <p class="lead reveal">Antes de empezar, trae los cambios del equipo. Mantén ramas cortas y bórralas cuando se fusionan.</p>
+    <div class="compare">
+      <div class="block block-terminal reveal">
+        <div class="block-head"><span class="tag tag-manual">Terminal</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>git switch main
+git pull
+git fetch --prune
+git branch -a
+git branch -d feature/login</code></pre>
+      </div>
+      <div class="block block-ai reveal">
+        <div class="block-head"><span class="tag tag-ai">Agentes IA</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>Actualiza main desde origin, limpia las referencias a ramas
+que ya no existen en el remoto y dime qué ramas locales
+puedo borrar porque ya están fusionadas. No las borres sin
+confirmarme.</code></pre>
+      </div>
+    </div>
+    <p class="expect reveal"><strong>Qué esperar:</strong> <code>git branch -a</code> muestra las locales y las remotas (<code>remotes/origin/...</code>).</p>
+  </section>
+
+  <!-- 12. Trabajar en equipo -->
+  <section id="equipo" class="slide dark" aria-labelledby="equipo-title">
+    <p class="eyebrow reveal">PASO 11</p>
+    <h2 id="equipo-title" class="reveal">Trabajar en equipo</h2>
+    <p class="lead reveal">Clona el repositorio, trabaja en tu rama y sincroniza con frecuencia para evitar sorpresas.</p>
+    <div class="compare">
+      <div class="block block-terminal reveal">
+        <div class="block-head"><span class="tag tag-manual">Terminal</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>git clone https://github.com/TU-USUARIO/TU-REPO.git
+cd TU-REPO
+git switch -c feature/mi-tarea
+git push -u origin feature/mi-tarea
+
+# Si el push es rechazado, trae los cambios primero:
+git pull --rebase</code></pre>
+      </div>
+      <div class="block block-ai reveal">
+        <div class="block-head"><span class="tag tag-ai">Agentes IA</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>Clona https://github.com/TU-USUARIO/TU-REPO.git, crea la
+rama feature/mi-tarea y súbela a origin. Si el push falla
+porque el remoto tiene cambios, explícame la causa antes de
+hacer pull --rebase.</code></pre>
+      </div>
+    </div>
+    <p class="note reveal"><strong>Regla de equipo:</strong> nunca hagas push directo a <code>main</code> si el equipo usa PRs. Trabaja en una rama.</p>
+  </section>
+
+  <!-- 13. Conflictos -->
+  <section id="conflictos" class="slide light" aria-labelledby="conflictos-title">
+    <p class="eyebrow reveal">PASO 12</p>
+    <h2 id="conflictos-title" class="reveal">Resolver un conflicto</h2>
+    <p class="lead reveal">Un conflicto aparece cuando dos personas cambian la misma línea. Git marca el lugar y tú decides qué queda.</p>
+    <pre class="conflict reveal"><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+const title = "Login";
+=======
+const title = "Iniciar sesión";
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/login</code></pre>
+    <div class="compare">
+      <div class="block block-terminal reveal">
+        <div class="block-head"><span class="tag tag-manual">Terminal</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>git pull
+# Edita el archivo: deja una versión y borra las marcas &lt;&lt;&lt;, ===, &gt;&gt;&gt;
+git add archivo-en-conflicto.js
+git commit -m "fix: resolve title conflict"</code></pre>
+      </div>
+      <div class="block block-ai reveal">
+        <div class="block-head"><span class="tag tag-ai">Agentes IA</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>Hay un conflicto de merge en archivo-en-conflicto.js.
+Muéstrame ambas versiones, explícame la diferencia y
+propón una resolución. Espera mi confirmación antes de
+hacer add y commit.</code></pre>
+      </div>
+    </div>
+    <p class="note reveal"><strong>Importante:</strong> borra siempre las marcas <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> y <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> antes de hacer commit.</p>
+  </section>
+
+  <!-- 14. README -->
+  <section id="readme" class="slide dark" aria-labelledby="readme-title">
+    <p class="eyebrow reveal">PASO 13</p>
+    <h2 id="readme-title" class="reveal">El README: la puerta de entrada</h2>
+    <p class="lead reveal">El README es lo primero que lee alguien que llega a tu repositorio. Debe responder: qué es, cómo instalarlo y cómo usarlo.</p>
+    <div class="cards cards-4">
+      <article class="card reveal"><p class="num">01</p><h3>Título</h3><p class="body">Nombre y una línea de descripción.</p></article>
+      <article class="card reveal"><p class="num">02</p><h3>Instalación</h3><p class="body">Comandos exactos para empezar.</p></article>
+      <article class="card reveal"><p class="num">03</p><h3>Uso</h3><p class="body">Un ejemplo que funcione.</p></article>
+      <article class="card reveal"><p class="num">04</p><h3>Contribuir</h3><p class="body">Ramas, PRs e issues.</p></article>
+    </div>
+    <div class="compare">
+      <div class="block block-terminal reveal">
+        <div class="block-head"><span class="tag tag-manual">Terminal</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>git add README.md
+git commit -m "docs: improve README"
+git push</code></pre>
+      </div>
+      <div class="block block-ai reveal">
+        <div class="block-head"><span class="tag tag-ai">Agentes IA</span><button class="copy" type="button">Copiar</button></div>
+        <pre><code>Lee el código de este proyecto y escribe un README.md con:
+título, descripción, requisitos, instalación, uso con un
+ejemplo y cómo contribuir (ramas, issues y PRs). Haz commit.</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15. Resumen -->
+  <section id="resumen" class="slide light" aria-labelledby="resumen-title">
+    <p class="eyebrow reveal">RESUMEN</p>
+    <h2 id="resumen-title" class="reveal">El ciclo de trabajo diario</h2>
+    <div class="flow reveal" aria-hidden="true">
+      <span>pull</span><span>switch -c</span><span>cambios</span><span>add</span><span>commit</span><span>push</span><span>PR</span><span>merge</span>
+    </div>
+    <table class="ref reveal">
+      <thead>
+        <tr><th>Qué quieres</th><th>Comando</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Ver el estado</td><td><code>git status</code></td></tr>
+        <tr><td>Preparar archivos</td><td><code>git add &lt;archivo&gt;</code></td></tr>
+        <tr><td>Guardar cambios</td><td><code>git commit -m "tipo: mensaje"</code></td></tr>
+        <tr><td>Ver historia</td><td><code>git log --oneline</code></td></tr>
+        <tr><td>Crear y cambiar rama</td><td><code>git switch -c nombre</code></td></tr>
+        <tr><td>Traer cambios</td><td><code>git pull</code></td></tr>
+        <tr><td>Subir cambios</td><td><code>git push</code></td></tr>
+        <tr><td>Abrir PR</td><td><code>gh pr create --fill</code></td></tr>
+        <tr><td>Crear issue</td><td><code>gh issue create</code></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
