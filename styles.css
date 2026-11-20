@@ -96,6 +96,7 @@ code {
 }
 
 .slide.light code { background: rgba(154, 124, 0, 0.12); }
+.slide.light .block pre code { background: none; }
 
 /* Tarjetas */
 .cards {
