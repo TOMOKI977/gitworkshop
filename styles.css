@@ -360,6 +360,11 @@ body.track-agentes .block-terminal { display: none; }
   color: var(--muted);
 }
 .slide.light .qr figcaption { color: var(--light-muted); }
+.qr-cover { align-self: flex-start; margin-top: 8px; }
+.qr-cover img { width: min(160px, 60vw); }
+.qr-mini { align-self: flex-start; flex-direction: row; align-items: center; gap: 12px; text-align: left; }
+.qr-mini img { width: 96px; padding: 4px; }
+.qr-mini figcaption { max-width: 22ch; font-size: 0.82rem; }
 .link-card { align-items: flex-start; }
 .link-card .qr { align-self: center; }
 .link-card .link-btn { word-break: break-word; max-width: 100%; }
