@@ -360,11 +360,43 @@ body.track-agentes .block-terminal { display: none; }
   color: var(--muted);
 }
 .slide.light .qr figcaption { color: var(--light-muted); }
-.qr-cover { align-self: flex-start; margin-top: 8px; }
-.qr-cover img { width: min(160px, 60vw); }
-.qr-mini { align-self: flex-start; flex-direction: row; align-items: center; gap: 12px; text-align: left; }
-.qr-mini img { width: 96px; padding: 4px; }
-.qr-mini figcaption { max-width: 22ch; font-size: 0.82rem; }
+/* QR en esquina: no interrumpen el contenido */
+.qr-mini,
+.qr-cover {
+  position: absolute;
+  margin: 0;
+  z-index: 2;
+}
+.qr-mini {
+  top: 24px;
+  right: 24px;
+}
+.qr-mini img {
+  width: 84px;
+  padding: 4px;
+}
+.qr-mini figcaption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.qr-cover {
+  right: 24px;
+  bottom: 24px;
+  align-items: flex-end;
+  text-align: right;
+}
+.qr-cover img { width: 120px; }
+.qr-cover figcaption { max-width: 20ch; font-size: 0.8rem; }
+
+@media (max-width: 699px) {
+  .qr-mini { display: none; }
+  .qr-cover { position: static; align-items: center; text-align: center; margin-top: 12px; }
+  .qr-cover img { width: 110px; }
+}
 .link-card { align-items: flex-start; }
 .link-card .qr { align-self: center; }
 .link-card .link-btn { word-break: break-word; max-width: 100%; }
